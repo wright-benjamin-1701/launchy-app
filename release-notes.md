@@ -4,16 +4,38 @@
 
 * 👷 Do not sync labels as it overrides manually added labels. PR [#1307](https://github.com/fastapi/full-stack-fastapi-template/pull/1307) by [@tiangolo](https://github.com/tiangolo).
 
+### Features
+
+* 🩺 Add DB healthcheck. PR [#1342](https://github.com/fastapi/full-stack-fastapi-template/pull/1342) by [@tiangolo](https://github.com/tiangolo).
+
 ### Refactors
 
+* ♻️ Update settings to use top level `.env` file. PR [#1359](https://github.com/fastapi/full-stack-fastapi-template/pull/1359) by [@tiangolo](https://github.com/tiangolo).
+* ⬆️ Migrate from Poetry to uv. PR [#1356](https://github.com/fastapi/full-stack-fastapi-template/pull/1356) by [@tiangolo](https://github.com/tiangolo).
+* 🔥 Remove logic for development dependencies and Jupyter, it was never documented, and I no longer use that trick. PR [#1355](https://github.com/fastapi/full-stack-fastapi-template/pull/1355) by [@tiangolo](https://github.com/tiangolo).
+* ♻️ Use Docker Compose `watch`. PR [#1354](https://github.com/fastapi/full-stack-fastapi-template/pull/1354) by [@tiangolo](https://github.com/tiangolo).
+* 🔧 Use plain base official Python Docker image. PR [#1351](https://github.com/fastapi/full-stack-fastapi-template/pull/1351) by [@tiangolo](https://github.com/tiangolo).
+* 🚚 Move location of scripts to simplify file structure. PR [#1352](https://github.com/fastapi/full-stack-fastapi-template/pull/1352) by [@tiangolo](https://github.com/tiangolo).
+* ♻️ Refactor prestart (migrations), move that to its own container. PR [#1350](https://github.com/fastapi/full-stack-fastapi-template/pull/1350) by [@tiangolo](https://github.com/tiangolo).
+* ♻️ Include `FRONTEND_HOST` in CORS origins by default. PR [#1348](https://github.com/fastapi/full-stack-fastapi-template/pull/1348) by [@tiangolo](https://github.com/tiangolo).
+* ♻️ Simplify domains with `api.example.com` for API and `dashboard.example.com` for frontend, improve local development with `localhost`. PR [#1344](https://github.com/fastapi/full-stack-fastapi-template/pull/1344) by [@tiangolo](https://github.com/tiangolo).
+* 🔥 Simplify Traefik, remove www-redirects that add complexity. PR [#1343](https://github.com/fastapi/full-stack-fastapi-template/pull/1343) by [@tiangolo](https://github.com/tiangolo).
+* 🔥 Enable support for Arm Docker images in Mac, remove old patch. PR [#1341](https://github.com/fastapi/full-stack-fastapi-template/pull/1341) by [@tiangolo](https://github.com/tiangolo).
 * ♻️ Remove duplicate information in the ItemCreate model. PR [#1287](https://github.com/fastapi/full-stack-fastapi-template/pull/1287) by [@jjaakko](https://github.com/jjaakko).
+
+### Upgrades
+
+* ⬆️ Upgrade FastAPI. PR [#1349](https://github.com/fastapi/full-stack-fastapi-template/pull/1349) by [@tiangolo](https://github.com/tiangolo).
 
 ### Docs
 
+* 💡 Add comments to Dockerfile with uv references. PR [#1357](https://github.com/fastapi/full-stack-fastapi-template/pull/1357) by [@tiangolo](https://github.com/tiangolo).
 * 📝 Add Email Templates to `backend/README.md`. PR [#1311](https://github.com/fastapi/full-stack-fastapi-template/pull/1311) by [@alejsdev](https://github.com/alejsdev).
 
 ### Internal
 
+* 🔨 Update `generate-client.sh` script, make it fail on errors, fix generation. PR [#1360](https://github.com/fastapi/full-stack-fastapi-template/pull/1360) by [@tiangolo](https://github.com/tiangolo).
+* 👷 Add GitHub Actions workflow to lint backend apart from tests. PR [#1358](https://github.com/fastapi/full-stack-fastapi-template/pull/1358) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Improve playwright CI job. PR [#1335](https://github.com/fastapi/full-stack-fastapi-template/pull/1335) by [@patrick91](https://github.com/patrick91).
 * 👷 Update `issue-manager.yml`. PR [#1329](https://github.com/fastapi/full-stack-fastapi-template/pull/1329) by [@tiangolo](https://github.com/tiangolo).
 * 💚 Set `include-hidden-files` to `True` when using the `upload-artifact` GH action. PR [#1327](https://github.com/fastapi/full-stack-fastapi-template/pull/1327) by [@svlandeg](https://github.com/svlandeg).
