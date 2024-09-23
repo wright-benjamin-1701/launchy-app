@@ -21,6 +21,7 @@ export type ItemPublic = {
   description?: string | null
   id: string
   owner_id: string
+
 }
 
 export type ItemUpdate = {
@@ -30,6 +31,27 @@ export type ItemUpdate = {
 
 export type ItemsPublic = {
   data: Array<ItemPublic>
+  count: number
+}
+export type ProjectCreate = {
+  title: string
+  description?: string | null
+}
+
+export type ProjectPublic = {
+  title: string
+  description?: string | null
+  id: string
+  owner_id: string
+}
+
+export type ProjectUpdate = {
+  title?: string | null
+  description?: string | null
+}
+
+export type ProjectsPublic = {
+  data: Array<ProjectPublic>
   count: number
 }
 

@@ -18,6 +18,10 @@ import type {
   ItemPublic,
   ItemsPublic,
   ItemUpdate,
+  ProjectCreate,
+  ProjectsPublic,
+  ProjectPublic,
+  ProjectUpdate
 } from "./models"
 
 export type TDataLoginAccessToken = {
@@ -527,3 +531,131 @@ export class ItemsService {
     })
   }
 }
+export type TDataReadProjects = {
+  limit?: number
+  skip?: number
+}
+export type TDataCreateProject = {
+  requestBody: ProjectCreate
+}
+export type TDataReadProject = {
+  id: string
+}
+export type TDataUpdateProject = {
+  id: string
+  requestBody: ProjectUpdate
+}
+export type TDataDeleteProject = {
+  id: string
+}
+
+export class ProjectsService {
+  /**
+   * Read Projects
+   * Retrieve projects.
+   * @returns ProjectsPublic Successful Response
+   * @throws ApiError
+   */
+  public static readProjects(
+    data: TDataReadProjects = {},
+  ): CancelablePromise<ProjectsPublic> {
+    const { limit = 100, skip = 0 } = data
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/projects/",
+      query: {
+        skip,
+        limit,
+      },
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+
+  /**
+   * Create Project
+   * Create new project.
+   * @returns ProjectPublic Successful Response
+   * @throws ApiError
+   */
+  public static createProject(
+    data: TDataCreateProject,
+  ): CancelablePromise<ProjectPublic> {
+    const { requestBody } = data
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/projects/",
+      body: requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+
+  /**
+   * Read Project
+   * Get project by ID.
+   * @returns ProjectPublic Successful Response
+   * @throws ApiError
+   */
+  public static readProject(data: TDataReadProject): CancelablePromise<ProjectPublic> {
+    const { id } = data
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/projects/{id}",
+      path: {
+        id,
+      },
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+
+  /**
+   * Update Project
+   * Update an project.
+   * @returns ProjectPublic Successful Response
+   * @throws ApiError
+   */
+  public static updateProject(
+    data: TDataUpdateProject,
+  ): CancelablePromise<ProjectPublic> {
+    const { id, requestBody } = data
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/projects/{id}",
+      path: {
+        id,
+      },
+      body: requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+
+  /**
+   * Delete Project
+   * Delete an project.
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteProject(data: TDataDeleteProject): CancelablePromise<Message> {
+    const { id } = data
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/projects/{id}",
+      path: {
+        id,
+      },
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+}
+

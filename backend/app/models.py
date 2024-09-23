@@ -92,6 +92,87 @@ class ItemsPublic(SQLModel):
     data: list[ItemPublic]
     count: int
 
+# ProjectBase class to add project-specific properties
+class ProjectBase(SQLModel):
+    name: str = Field(min_length=1, max_length=255)
+    description: str | None = Field(default=None, max_length=255)
+
+
+# Database model, database table inferred from class name
+class Project(ProjectBase, table=True):
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    name: str = Field(max_length=255)
+    description: str | None = Field(default=None, max_length=255)
+    resources: list["Resource"] = Relationship(back_populates="project", cascade_delete=True)
+
+
+# Properties to receive via API on update, all are optional
+class ProjectUpdate(ProjectBase):
+    name: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
+    description: str | None = Field(default=None, max_length=255)
+
+# Properties to return via API, id is always required
+class ProjectPublic(ProjectBase):
+    id: uuid.UUID
+
+class ProjectsPublic(SQLModel):
+    data: list[ProjectPublic]
+    count: int
+
+
+# Properties to receive via API on project creation
+class ProjectCreate(SQLModel):
+    name: str = Field(min_length=1, max_length=255)
+    description: str | None = Field(default=None, max_length=255)
+
+
+# Properties to receive via API on resource creation
+class ResourceCreate(SQLModel):
+    name: str = Field(min_length=1, max_length=255)
+    description: str | None = Field(default=None, max_length=255)
+    project_id: uuid.UUID = Field(foreign_key="project.id", nullable=False)
+    project: Project | None = Relationship(back_populates="resources")
+
+
+# Properties to receive via API on resource update, all are optional
+class ResourceUpdate(SQLModel):
+    name: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
+    description: str | None = Field(default=None, max_length=255)
+
+
+
+# Properties to return via API, id is always required
+class ProjectPublic(ProjectBase):
+    id: uuid.UUID
+
+
+class ProjectsPublic(SQLModel):
+    data: list[ProjectPublic]
+    count: int
+
+# ResourceBase class to add resource-specific properties
+class ResourceBase(SQLModel):
+    name: str = Field(min_length=1, max_length=255)
+    description: str | None = Field(default=None, max_length=255)
+
+# Database model, database table inferred from class name
+class Resource(ResourceBase, table=True):
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    name: str = Field(max_length=255)
+    description: str | None = Field(default=None, max_length=255)
+    project_id: uuid.UUID = Field(foreign_key="project.id", nullable=False)
+    project: Project | None = Relationship(back_populates="resources")
+
+# Properties to return via API, id is always required
+class ResourcePublic(ResourceBase):
+    id: uuid.UUID
+    project_id: uuid.UUID
+
+
+class ResourcesPublic(SQLModel):
+    data: list[ResourcePublic]
+    count: int
+
 
 # Generic message
 class Message(SQLModel):
