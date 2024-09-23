@@ -34,12 +34,12 @@ export type ItemsPublic = {
   count: number
 }
 export type ProjectCreate = {
-  title: string
+  name: string
   description?: string | null
 }
 
 export type ProjectPublic = {
-  title: string
+  name: string
   description?: string | null
   id: string
   owner_id: string

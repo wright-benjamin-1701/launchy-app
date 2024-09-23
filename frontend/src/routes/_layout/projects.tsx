@@ -70,7 +70,7 @@ function ProjectsTable() {
             <Thead>
               <Tr>
                 <Th>ID</Th>
-                <Th>Title</Th>
+                <Th>Name</Th>
                 <Th>Description</Th>
                 <Th>Actions</Th>
               </Tr>
@@ -91,7 +91,7 @@ function ProjectsTable() {
                   <Tr key={project.id} opacity={isPlaceholderData ? 0.5 : 1}>
                     <Td>{project.id}</Td>
                     <Td isTruncated maxWidth="150px">
-                      {project.title}
+                      {project.name}
                     </Td>
                     <Td
                       color={!project.description ? "ui.dim" : "inherit"}

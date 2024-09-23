@@ -36,7 +36,7 @@ const AddProject = ({ isOpen, onClose }: AddProjectProps) => {
       mode: "onBlur",
       criteriaMode: "all",
       defaultValues: {
-        title: "",
+        name: "",
         description: "",
       },
     })
@@ -69,15 +69,15 @@ const AddProject = ({ isOpen, onClose }: AddProjectProps) => {
           <ModalHeader>Add Project</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
-            <FormControl isRequired isInvalid={!!errors.title} mt={4}>
-              <FormLabel htmlFor="title">Title</FormLabel>
-              <Input id="title" {...register("title", { required: "Title is required." })} placeholder="Title" type="text" />
-              {errors.title && (<FormErrorMessage>{errors.title.message}</FormErrorMessage>)}
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel htmlFor="description">Description</FormLabel>
-              <Input id="description" {...register("description")} placeholder="Description" type="text" />
-              </FormControl>
+              <FormControl isRequired isInvalid={!!errors.name} mt={4}>
+                <FormLabel htmlFor="name">Name</FormLabel>
+                <Input id="name" {...register("name", { required: "Name is required." })} placeholder="Name" type="text" />
+                {errors.name && (<FormErrorMessage>{errors.name.message}</FormErrorMessage>)}
+                </FormControl>
+                <FormControl mt={4}>
+                  <FormLabel htmlFor="description">Description</FormLabel>
+                <Input id="description" {...register("description")} placeholder="Description" type="text" />
+                </FormControl>
             </ModalBody>
             <ModalFooter gap={3}>
             <Button variant="primary" type="submit" isLoading={isSubmitting}>Save</Button>
