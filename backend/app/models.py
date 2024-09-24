@@ -44,6 +44,7 @@ class User(UserBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     hashed_password: str
     items: list["Item"] = Relationship(back_populates="owner", cascade_delete=True)
+    projects: list["Project"] = Relationship(back_populates="owner", cascade_delete=True)
 
 
 # Properties to return via API, id is always required
@@ -103,6 +104,10 @@ class Project(ProjectBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     name: str = Field(max_length=255)
     description: str | None = Field(default=None, max_length=255)
+    owner_id: uuid.UUID = Field(
+        foreign_key="user.id", nullable=False, ondelete="CASCADE"
+    )
+    owner: User | None = Relationship(back_populates="projects")
     resources: list["Resource"] = Relationship(back_populates="project", cascade_delete=True)
 
 
@@ -114,6 +119,7 @@ class ProjectUpdate(ProjectBase):
 # Properties to return via API, id is always required
 class ProjectPublic(ProjectBase):
     id: uuid.UUID
+    owner_id: uuid.UUID
 
 class ProjectsPublic(SQLModel):
     data: list[ProjectPublic]
@@ -138,12 +144,6 @@ class ResourceCreate(SQLModel):
 class ResourceUpdate(SQLModel):
     name: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
     description: str | None = Field(default=None, max_length=255)
-
-
-
-# Properties to return via API, id is always required
-class ProjectPublic(ProjectBase):
-    id: uuid.UUID
 
 
 class ProjectsPublic(SQLModel):
